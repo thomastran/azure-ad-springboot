@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 
 class Header extends React.Component {
     render() {
-        console.log(authContext);
         const userInfo = authContext._user;
         return (
             <div className="navbar navbar-inverse navbar-fixed-top" role="navigation">
