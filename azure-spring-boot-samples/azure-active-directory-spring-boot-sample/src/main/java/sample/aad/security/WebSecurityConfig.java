@@ -22,8 +22,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-@EnableGlobalMethodSecurity(securedEnabled = true,
-        prePostEnabled = true)
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,24 +32,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors();
 
-        http.authorizeRequests().antMatchers("/home").permitAll();
-
-        http.authorizeRequests().antMatchers("/api/**").authenticated();
-
-        http.logout().logoutSuccessUrl("/").permitAll();
-
+        // http.authorizeRequests().antMatchers("/home").permitAll();
+        // http.authorizeRequests().antMatchers("/api/**").authenticated();
+        // http.logout().logoutSuccessUrl("/").permitAll();
         http.authorizeRequests().anyRequest().permitAll();
-
-        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
-
+        // http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
         http.addFilterBefore(aadAuthFilter, UsernamePasswordAuthenticationFilter.class);
-        http.headers().frameOptions().disable();
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
-    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
@@ -63,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         configuration.setAllowCredentials(true);
         // setAllowedHeaders is important! Without it, OPTIONS preflight request
         // will fail with 403 Invalid CORS request
-        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
