@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000") // should created a whitelist for this
 @RestController
 public class TodolistController {
     private final List<TodoItem> todoList = new ArrayList<>();
@@ -56,7 +56,6 @@ public class TodolistController {
         return new ResponseEntity<>(todoList, HttpStatus.OK);
     }
 
-    // @CrossOrigin(origins = "http://localhost:3000")
     @PreAuthorize("hasRole('group1')")
     @RequestMapping(value = "/api/todolist", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addNewTodoItem(@RequestBody TodoItem item) {

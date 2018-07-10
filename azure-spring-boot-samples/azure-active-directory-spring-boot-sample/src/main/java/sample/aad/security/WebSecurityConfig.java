@@ -31,9 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.cors();
+        http.cors();
 
         http.authorizeRequests().antMatchers("/home").permitAll();
+
         http.authorizeRequests().antMatchers("/api/**").authenticated();
 
         http.logout().logoutSuccessUrl("/").permitAll();
@@ -50,4 +51,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
     }
+
 }
