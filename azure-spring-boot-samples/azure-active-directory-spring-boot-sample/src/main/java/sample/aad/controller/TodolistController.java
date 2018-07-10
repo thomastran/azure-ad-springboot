@@ -19,7 +19,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-@CrossOrigin(origins = "http://localhost:3000") // should created a whitelist for this
+// @CrossOrigin(origins = "http://localhost:3000") // should created a whitelist for this
 @RestController
 public class TodolistController {
     private final List<TodoItem> todoList = new ArrayList<>();
